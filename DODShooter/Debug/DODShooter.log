@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\Hugo.Lindroth\source\repos\DODShooter\DODShooter\main.cpp(133,145): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Hugo.Lindroth\source\repos\DODShooter\DODShooter\main.cpp(133,121): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  DODShooter.vcxproj -> C:\Users\Hugo.Lindroth\source\repos\DODShooter\Debug\DODShooter.exe
