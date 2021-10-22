@@ -3,11 +3,9 @@
 #include <stdio.h>
 #include <string>
 #include "TextureManager.h"
-#include "EventManager.h"
-#include "ECSConstants.h"
-#include "SystemRender.h"
-#include "EntityIDManager.h"
-#include "ComponentManager.h"
+#include "Keyboardstate.h"
+#include "HugoMath.h"
+#include "SystemManager.h"
 
 const char* windowTitle = "DODShooter Hugo Lindroth";
 
@@ -16,7 +14,7 @@ struct SDLData
 {
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
-	Vector2 dimensions = {640, 480};
+	Vector2 dimensions = {1024, 768};
 };
 
 //forward declarations
@@ -26,14 +24,11 @@ void close(SDLData* out_data);
 int main(int argc, char* argv[])
 {
 	SDLData coreData;
-	SDL_Event e;
+	SDL_Event myEvent;
 	TextureManager textureManager;
-	EventManager eventManager;
+	SystemManager systemManager(&textureManager);
 
 	//Ecs
-	EntityIDManager entityManager;
-	ComponentManager compManager;
-	SystemRender renderSystem;
 
 #pragma region
 	if (!initSDL(&coreData))
@@ -47,62 +42,75 @@ int main(int argc, char* argv[])
 	}
 #pragma endregion Initalizations
 
-	//TEST CODE
-	Entity ent = entityManager.CreateEntity();
-	Signature s = COMPONENT_TRANSFORM | COMPONENT_TEXTURE;
-	entityManager.SetSignature(ent, s);
-	
-	Transform tf;
-	tf.pos = Vector2(coreData.dimensions.x * 0.5f, coreData.dimensions.y * 0.5f);
-	tf.scale = Vector2{0.5f, 0.5f};
-	compManager.SetComponent<Transform>(ent, tf);
-
-	StaticTexture tex;
-	SDL_Texture* textureTemp = textureManager.GetTexture(TextureManager::TEXTURE_PLAYER);
-	int tw, th;
-	Uint32 format; int access;
-	SDL_QueryTexture(textureTemp, &format, &access, &tw, &th);
-
-	tex.Init(textureTemp, {0,0,tw,th});
-
-	compManager.SetComponent<StaticTexture>(ent, tex);
-	tex.srcRect = {0,0,tw,th};
-
-	renderSystem.EntitySignatureChanged(ent, s);
-
+	Entity player = systemManager.CreateEntity();
+	systemManager.AddTransformComponent(player, {100,100}, {coreData.dimensions.x * 0.5f, coreData.dimensions.y * 0.5f });
+	systemManager.AddTextureComponent(player, TextureManager::TEXTURE_PLAYER, nullptr, SDL_BLENDMODE_BLEND);
+	systemManager.AddPlayerComponent(player);
 
 #pragma region
 	
 	bool quit = false;
+	Uint32 previousTime = 0;
+	MyKeyBoardState keyboardState;
 	while (!quit)
 	{
+		Uint32 time = SDL_GetTicks();
+		float DeltaTime = (time - previousTime) * 0.001;
+		previousTime = time;
+
 		//Poll event queue/stack
-		while (SDL_PollEvent(&e) > 0)
+		while (SDL_PollEvent(&myEvent) > 0)
 		{
-			if (e.type == SDL_QUIT)
+			if (myEvent.type == SDL_QUIT)
 			{
 				quit = true;
 				break;
 			}
-			else if(e.type == SDL_KEYDOWN || e.type == SDL_KEYUP) //Bitwise operations to check if e.type is keydown or keyup 
+			else if(myEvent.type == SDL_KEYDOWN) //Bitwise operations to check if e.type is keydown or keyup 
 			{
-				if (e.key.keysym.sym == SDLK_ESCAPE)
+				if (myEvent.key.keysym.sym == SDLK_ESCAPE)
 				{
 					quit = true;
 					break;
 				}
 				else
-					eventManager.HandleKeyEvent(&e);
+				{
+					switch (myEvent.key.keysym.sym)
+					{
+					default:
+						break;
+					case SDLK_w: keyboardState.forward = true; break;
+					case SDLK_s: keyboardState.backward = true; break;
+					case SDLK_d: keyboardState.right = true; break;
+					case SDLK_a: keyboardState.left = true; break;
+					case SDLK_SPACE: keyboardState.space = true; break;
+					}
+				}
+			}
+			else if (myEvent.type == SDL_KEYUP) //Bitwise operations to check if e.type is keydown or keyup 
+			{
+				switch (myEvent.key.keysym.sym)
+				{
+				default:
+					break;
+				case SDLK_w: keyboardState.forward = false; break;
+				case SDLK_s: keyboardState.backward = false; break;
+				case SDLK_d: keyboardState.right = false; break;
+				case SDLK_a: keyboardState.left = false; break;
+				case SDLK_SPACE: keyboardState.space = false; break;
+				}
 			}
 			
-			renderSystem.RenderEntities(coreData.dimensions, coreData.renderer, &compManager);
-			//SDL_RenderCopy(coreData.renderer, textureManager.GetTexture(TextureManager::TEXTURE_BACKGROUND), nullptr, nullptr);
-			SDL_RenderPresent(coreData.renderer);
 		}
+		systemManager.UpdateEntities(DeltaTime, keyboardState);
+		systemManager.Move(coreData.dimensions);
+		systemManager.DestroyAllPending();
+
+		systemManager.Render(coreData.dimensions, coreData.renderer);
+		//SDL_RenderCopy(coreData.renderer, textureManager.GetTexture(TextureManager::TEXTURE_BACKGROUND), nullptr, nullptr);
+		SDL_RenderPresent(coreData.renderer);
 	}
 #pragma endregion Main loop
-
-	
 
 	close(&coreData);
 

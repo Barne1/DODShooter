@@ -11,20 +11,25 @@ void SystemRender::RenderEntities(Vector2 ScreenDimensions, SDL_Renderer* render
 
 	for (Entity e : entities)
 	{
-		
-		Transform* t = compMan->GetComponent<Transform>(e);
-		StaticTexture* tex = compMan->GetComponent<StaticTexture>(e);
-		int halfWidth = tex->srcRect.w * 0.5f;
-		int halfHeight = tex->srcRect.h * 0.5f;
+		Transform* t = nullptr;
+		t = compMan->GetComponent<Transform>(e);
+		StaticTexture* tex = nullptr;
+		tex = compMan->GetComponent<StaticTexture>(e);
+		int width = t->size.y;
+		int height = t->size.y;
+		int halfWidth = width * 0.5f;
+		int halfHeight = height * 0.5f;
 
-		if(tex == nullptr)
-			printf("123");
 		if ((t->pos.x + halfWidth) < 0 || (t->pos.x - halfWidth) > ScreenDimensions.x) //out of bounds horizontally
-			return;
+		{
+			continue;
+		}
 		if ((t->pos.y + halfHeight) < 0 || (t->pos.y - halfHeight) > ScreenDimensions.y) //out of bounds vertically
-			return;
+		{
+			continue;
+		}
 
-		SDL_Rect dstRect = {t->pos.x - halfWidth, t->pos.y - halfHeight, tex->srcRect.w * t->scale.y, tex->srcRect.h * t->scale.y};
-		SDL_RenderCopy(renderer, tex->texture, &tex->srcRect, &dstRect);
+		SDL_Rect dstRect = {t->pos.x - halfWidth, t->pos.y - halfHeight, width, height};
+		SDL_RenderCopy(renderer, tex->texture, tex->srcRect, &dstRect);
 	}
 }

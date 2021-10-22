@@ -5,7 +5,7 @@
 struct Transform
 {
 	Vector2 pos;
-	Vector2 scale;
+	Vector2 size;
 	float rotationDeg;
 
 	void SafeAddRotation(float Deg) {

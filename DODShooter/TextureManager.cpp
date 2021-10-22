@@ -27,6 +27,7 @@ bool TextureManager::LoadTextures(SDL_Renderer* renderer)
         SDL_FreeSurface(tempSurface);
     }
 
+    SDL_SetTextureColorMod(textures[TEXTURE_ENEMYBULLET], 255, 0,0);
     return true;
 }
 

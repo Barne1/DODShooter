@@ -11,8 +11,28 @@ struct Vector2
 
 	float GetLengthSqr() const { return (x*x + y*y); }
 	float GetLength() const { return sqrt(GetLengthSqr()); }
-	void Normalize() { float mag = GetLength(); x /= mag; y /= mag; }
-	Vector2 GetNormalized() const { float mag = GetLength(); return Vector2(x / mag, y / mag); }
+	void Normalize() {
+		float mag = GetLength(); 
+		if (mag < 0.00001f)
+		{
+			x = 0; y = 0;
+		}
+		else
+		{
+			x /= mag; y /= mag;
+		}
+	}
+	Vector2 GetNormalized() const { 
+		float mag = GetLength();
+		if (mag < 0.00001f)
+		{
+			return Vector2(0, 0);
+		}
+		else
+		{
+			return Vector2(x / mag, y / mag);
+		}
+	}
 
 
 	//Standard arithmetic

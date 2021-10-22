@@ -3,6 +3,8 @@
 #include "ComponentArray.h"
 #include "Transform.h"
 #include "StaticTexture.h"
+#include "Player.h"
+#include "Bullet.h"
 #include <unordered_map>
 #include <memory>
 
@@ -24,6 +26,8 @@ private:
 	//Component Arrays
 	ComponentArray<Transform> transformArray;
 	ComponentArray<StaticTexture> textureArray;
+	ComponentArray<Player> playerArray;
+	ComponentArray<Bullet> bulletArray;
 };
 
 
@@ -61,6 +65,11 @@ inline void ComponentManager::EntityDestroyed(Entity e, Signature s)
 		transformArray.EntityDestroyed(e);
 	if (s & COMPONENT_TEXTURE)
 		textureArray.EntityDestroyed(e);
+	if (s & COMPONENT_PLAYER)
+		playerArray.EntityDestroyed(e);
+	if (s & COMPONENT_BULLET)
+		bulletArray.EntityDestroyed(e);
+
 }
 
 template<typename T>
@@ -72,6 +81,10 @@ inline ComponentArray<T>* ComponentManager::GetComponentArray()
 		return dynamic_cast<ComponentArray<T>*>(&transformArray);
 	if (typeid(T) == typeid(StaticTexture))
 		return dynamic_cast<ComponentArray<T>*>(&textureArray);
+	if (typeid(T) == typeid(Player))
+		return dynamic_cast<ComponentArray<T>*>(&playerArray);
+	if (typeid(T) == typeid(Bullet))
+		return dynamic_cast<ComponentArray<T>*>(&bulletArray);
 	//else
 	return nullptr;
 }

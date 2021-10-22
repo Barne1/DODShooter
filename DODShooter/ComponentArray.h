@@ -38,7 +38,7 @@ void ComponentArray<T>::Insert(Entity e, T component)
 
 	ArrayIndex newIndex = compArrSize; //new index is at the end of the array
 	entityToArrayIndex[e] = newIndex;
-	entityToArrayIndex[newIndex] = e;
+	arrayIndexToEntity[newIndex] = e;
 	compArray[newIndex] = component;
 	compArrSize++;
 }
@@ -48,6 +48,7 @@ void ComponentArray<T>::Remove(Entity e)
 {
 	if (entityToArrayIndex.find(e) == entityToArrayIndex.end())
 	{
+		printf("Could not remove %d\n", e);
 		return;
 	}
 

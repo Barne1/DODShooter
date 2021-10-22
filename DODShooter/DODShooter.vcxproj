@@ -20,25 +20,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityIDManager.cpp" />
-    <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="HugoMath.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="SystemManager.cpp" />
+    <ClCompile Include="SystemMovement.cpp" />
     <ClCompile Include="SystemRender.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="SystemUpdate.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="ComponentArray.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="ECSConstants.h" />
     <ClInclude Include="EntityIDManager.h" />
-    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="Keyboardstate.h" />
     <ClInclude Include="HugoMath.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="StaticTexture.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="SystemMovement.h" />
     <ClInclude Include="SystemRender.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="SystemUpdate.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -110,12 +118,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDL2_image-2.0.5\include;C:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2_image-2.0.5-win32-x64\include;C:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2_image-2.0.5\lib\x86;C:\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SDL2_image-2.0.5-win32-x64\lib\x86;C:\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

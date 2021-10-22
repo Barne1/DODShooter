@@ -13,13 +13,17 @@ class TextureManager
 		{
 			TEXTURE_BACKGROUND,
 			TEXTURE_PLAYER,
+			TEXTURE_PLAYERBULLET,
+			TEXTURE_ENEMYBULLET,
 			TEXTURE_TOTAL
 		};
 	protected:
 		const std::string mainPath = "Images\\";
 		const std::string paths[TEXTURE_TOTAL] = {
 			"background.png",
-			"player.png"
+			"player.png",
+			"bullet.png",
+			"bullet.png"
 		};
 #pragma endregion This region contains paths and enums corresponding to them
 //Class data
