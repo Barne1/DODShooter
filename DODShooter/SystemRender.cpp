@@ -15,7 +15,7 @@ void SystemRender::RenderEntities(Vector2 ScreenDimensions, SDL_Renderer* render
 		t = compMan->GetComponent<Transform>(e);
 		StaticTexture* tex = nullptr;
 		tex = compMan->GetComponent<StaticTexture>(e);
-		int width = t->size.y;
+		int width = t->size.x;
 		int height = t->size.y;
 		int halfWidth = width * 0.5f;
 		int halfHeight = height * 0.5f;

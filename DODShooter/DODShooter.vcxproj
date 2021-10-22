@@ -19,10 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionSystem.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EntityIDManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="SystemMovement.cpp" />
@@ -32,13 +35,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="ComponentArray.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="ECSConstants.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="EntityIDManager.h" />
     <ClInclude Include="Keyboardstate.h" />
     <ClInclude Include="HugoMath.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Spawner.h" />
     <ClInclude Include="StaticTexture.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="SystemManager.h" />

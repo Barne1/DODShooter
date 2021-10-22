@@ -15,6 +15,7 @@ class TextureManager
 			TEXTURE_PLAYER,
 			TEXTURE_PLAYERBULLET,
 			TEXTURE_ENEMYBULLET,
+			TEXTURE_ENEMY,
 			TEXTURE_TOTAL
 		};
 	protected:
@@ -23,7 +24,8 @@ class TextureManager
 			"background.png",
 			"player.png",
 			"bullet.png",
-			"bullet.png"
+			"bullet.png",
+			"enemy.png"
 		};
 #pragma endregion This region contains paths and enums corresponding to them
 //Class data

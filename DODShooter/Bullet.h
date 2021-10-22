@@ -20,7 +20,6 @@ public:
 	float GetSpeed() { return speed; }
 	Vector2 GetFrameMovement();
 	const static int size = 25;
-
 protected:
 	Allegiance allegiance;
 	Vector2 direction = {0, 1};

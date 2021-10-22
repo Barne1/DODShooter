@@ -26,3 +26,4 @@ void Player::Update(float DeltaTime, MyKeyBoardState keyboardState, SystemManage
 		sysManager->SpawnBulletPrefab(Allegiance::PLAYER, Vector2(lastPos.x, lastPos.y - bulletBuffer));
 	}
 }
+

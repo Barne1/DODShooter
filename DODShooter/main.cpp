@@ -42,10 +42,19 @@ int main(int argc, char* argv[])
 	}
 #pragma endregion Initalizations
 
+	Entity background = systemManager.CreateEntity();
+	systemManager.AddTransformComponent(background, { coreData.dimensions.x, coreData.dimensions.y}, { coreData.dimensions.x * 0.5f, coreData.dimensions.y * 0.5f });
+	systemManager.AddTextureComponent(background, TextureManager::TEXTURE_BACKGROUND, nullptr, SDL_BLENDMODE_NONE);
+
 	Entity player = systemManager.CreateEntity();
 	systemManager.AddTransformComponent(player, {100,100}, {coreData.dimensions.x * 0.5f, coreData.dimensions.y * 0.5f });
 	systemManager.AddTextureComponent(player, TextureManager::TEXTURE_PLAYER, nullptr, SDL_BLENDMODE_BLEND);
 	systemManager.AddPlayerComponent(player);
+	systemManager.AddCircleColliderComponent(player, 50, COLLIDER_PLAYER);
+
+	systemManager.SpawnSpawner({ coreData.dimensions.x * 0.2f, coreData.dimensions.y * 0.01f});
+	systemManager.SpawnSpawner({ coreData.dimensions.x * 0.5f, coreData.dimensions.y * 0.01f});
+	systemManager.SpawnSpawner({ coreData.dimensions.x * 0.8f, coreData.dimensions.y * 0.01f});
 
 #pragma region
 	
@@ -104,6 +113,7 @@ int main(int argc, char* argv[])
 		}
 		systemManager.UpdateEntities(DeltaTime, keyboardState);
 		systemManager.Move(coreData.dimensions);
+		systemManager.HandleCollision();
 		systemManager.DestroyAllPending();
 
 		systemManager.Render(coreData.dimensions, coreData.renderer);

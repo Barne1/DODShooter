@@ -28,6 +28,7 @@ bool TextureManager::LoadTextures(SDL_Renderer* renderer)
     }
 
     SDL_SetTextureColorMod(textures[TEXTURE_ENEMYBULLET], 255, 0,0);
+    SDL_SetTextureColorMod(textures[TEXTURE_BACKGROUND], 100, 100, 100);
     return true;
 }
 

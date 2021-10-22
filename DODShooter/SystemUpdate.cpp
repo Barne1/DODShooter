@@ -3,7 +3,7 @@
 
 SystemUpdate::SystemUpdate()
 {
-	systemSignature = COMPONENT_PLAYER | COMPONENT_BULLET; //override for multiple types
+	systemSignature = COMPONENT_PLAYER | COMPONENT_BULLET | COMPONENT_ENEMY | COMPONENT_SPAWNER; //override for multiple types
 }
 
 void SystemUpdate::UpdateEntities(float DeltaTime, MyKeyBoardState keyboardState, SystemManager* sysManager, ComponentManager* compManager)
@@ -23,6 +23,21 @@ void SystemUpdate::UpdateEntities(float DeltaTime, MyKeyBoardState keyboardState
 		if (b != nullptr)
 		{
 			b->Update(DeltaTime);
+			continue;
+		}
+		//else
+		Enemy* enemy = nullptr;
+		enemy = compManager->GetComponent<Enemy>(e);
+		if (enemy != nullptr)
+		{
+			enemy->Update(DeltaTime, sysManager);
+			continue;
+		}
+		Spawner* spawner = nullptr;
+		spawner = compManager->GetComponent<Spawner>(e);
+		if (spawner != nullptr)
+		{
+			spawner->Update(DeltaTime, sysManager);
 			continue;
 		}
 	}

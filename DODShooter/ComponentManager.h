@@ -5,6 +5,9 @@
 #include "StaticTexture.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "Enemy.h"
+#include "CircleCollider.h"
+#include "Spawner.h"
 #include <unordered_map>
 #include <memory>
 
@@ -28,6 +31,9 @@ private:
 	ComponentArray<StaticTexture> textureArray;
 	ComponentArray<Player> playerArray;
 	ComponentArray<Bullet> bulletArray;
+	ComponentArray<CircleCollider> colliderArray;
+	ComponentArray<Enemy> enemyArray;
+	ComponentArray<Spawner> spawnerArray;
 };
 
 
@@ -69,7 +75,12 @@ inline void ComponentManager::EntityDestroyed(Entity e, Signature s)
 		playerArray.EntityDestroyed(e);
 	if (s & COMPONENT_BULLET)
 		bulletArray.EntityDestroyed(e);
-
+	if (s & COMPONENT_COLLIDER)
+		colliderArray.EntityDestroyed(e);
+	if (s & COMPONENT_ENEMY)
+		enemyArray.EntityDestroyed(e);
+	if (s & COMPONENT_SPAWNER)
+		spawnerArray.EntityDestroyed(e);
 }
 
 template<typename T>
@@ -85,6 +96,12 @@ inline ComponentArray<T>* ComponentManager::GetComponentArray()
 		return dynamic_cast<ComponentArray<T>*>(&playerArray);
 	if (typeid(T) == typeid(Bullet))
 		return dynamic_cast<ComponentArray<T>*>(&bulletArray);
+	if (typeid(T) == typeid(CircleCollider))
+		return dynamic_cast<ComponentArray<T>*>(&colliderArray);
+	if (typeid(T) == typeid(Enemy))
+		return dynamic_cast<ComponentArray<T>*>(&enemyArray);
+	if (typeid(T) == typeid(Spawner))
+		return dynamic_cast<ComponentArray<T>*>(&spawnerArray);
 	//else
 	return nullptr;
 }

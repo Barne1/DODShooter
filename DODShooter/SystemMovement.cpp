@@ -4,7 +4,7 @@
 
 SystemMovement::SystemMovement()
 {
-	systemSignature = COMPONENT_PLAYER | COMPONENT_BULLET;  //special override below that turns out true if we have either a bullet or a player
+	systemSignature = COMPONENT_PLAYER | COMPONENT_BULLET | COMPONENT_ENEMY;  //special override below that turns out true if we have either a bullet or a player
 }
 
 void SystemMovement::Move(Vector2 dimensions, ComponentManager* compManager, SystemManager* sysManager)
@@ -56,11 +56,44 @@ void SystemMovement::Move(Vector2 dimensions, ComponentManager* compManager, Sys
 			if (outOfBounds)
 			{
 				sysManager->MarkForDestroy(e);
-				continue;;
+				continue;
 			}
 			//else
 
 			t->pos = Vector2(newX, newY);
+			continue;
+		}
+		//else
+		Enemy* enemy = nullptr;
+		enemy = compManager->GetComponent<Enemy>(e);
+		if (enemy != nullptr)
+		{
+			float newX = t->pos.x;
+			float newY = t->pos.y;
+			newX += enemy->GetFrameMovement().x;
+			newY += enemy->GetFrameMovement().y;
+
+			int boundsBuffer = 500;
+			int lowerXBounds = 0 - boundsBuffer;
+			int lowerYBounds = 0 - boundsBuffer;
+			int upperXBounds = dimensions.x + boundsBuffer;
+			int upperYBounds = dimensions.y + boundsBuffer;
+
+			bool outOfBounds = (
+				newX < lowerXBounds ||
+				newX > upperXBounds ||
+				newY < lowerYBounds ||
+				newY > upperYBounds);
+
+			if (outOfBounds)
+			{
+				sysManager->MarkForDestroy(e);
+				continue;
+			}
+			//else
+
+			t->pos = Vector2(newX, newY);
+			enemy->SetLastPos(t->pos);
 			continue;
 		}
 	}

@@ -1,26 +1,6 @@
-﻿  Bullet.cpp
+﻿  main.cpp
 C:\Users\Hugo\source\repos\DODShooter\DODShooter\HugoMath.h(13,39): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  Player.cpp
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\HugoMath.h(13,39): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  System.cpp
-  SystemManager.cpp
-  SystemMovement.cpp
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemMovement.cpp(47,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemMovement.cpp(48,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  SystemRender.cpp
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(18,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(19,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(20,17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(21,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(32,32): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(32,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(32,54): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\SystemRender.cpp(32,54): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  SystemUpdate.cpp
-  main.cpp
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\HugoMath.h(13,39): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(58,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(141,145): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(141,121): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
+C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(67,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(151,145): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Hugo\source\repos\DODShooter\DODShooter\main.cpp(151,121): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   DODShooter.vcxproj -> C:\Users\Hugo\source\repos\DODShooter\Debug\DODShooter.exe
